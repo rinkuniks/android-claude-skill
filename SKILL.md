@@ -38,7 +38,7 @@ Build Android applications following Google's official architecture guidance, as
 
 **Auditing, reviewing, or refactoring existing Android/Compose/KMP code?**
 → Read [audit-checklist.md](references/audit-checklist.md)
-→ Run its Scope Sizing → TODO Matrix → Refactor → Verify workflow (10 dimensions: style, memory, performance/ANR, security, UI integrity, architecture, dead code, bugs, test coverage, accessibility)
+→ Run its Context Graph → Scope Sizing → TODO Matrix → Refactor → Verify workflow (10 dimensions: style, memory, performance/ANR, security, UI integrity, architecture, dead code, bugs, test coverage, accessibility) — reads the whole project first to build a module/dependency graph, attached in the final report alongside the TODO matrix
 
 ## Core Principles
 

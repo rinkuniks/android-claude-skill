@@ -4,7 +4,19 @@ Use this when auditing or refactoring **existing** Android/Compose/KMP code (as 
 
 ---
 
-## 0. Scope Sizing (run before anything else)
+## 0. Full-Project Context Graph (mandatory, run first)
+
+Before any dimension-level audit, read the **whole project's structure** so later findings are made with full cross-module context, not a single-file view. This is a structural pass, not a full file-body read:
+
+- Read `settings.gradle.kts` and every `build.gradle.kts`/`build.gradle` to learn every module and its declared dependencies.
+- Read top-level package layout per module (not full file bodies yet) to learn what each module actually contains.
+- From this, build a **module/dependency graph** — the graph type that best fits Android's multi-module structure (analogous to how a tool like Graphify visualizes node/edge relationships, here applied to Gradle modules instead of generic code entities): which modules depend on which, and where `feature:*:api` vs `feature:*:impl` and `core:*` modules sit relative to each other and to `app`.
+- **Single-module app (no multi-module Gradle setup):** fall back to a package/class-level import graph instead — same node/edge idea, one level down.
+- This graph is a **reporting artifact only** — attach it in the final report (Section 4 below) alongside the TODO matrix. It does not gate or replace the per-file deep-reads in Section 1; it gives the reader (and you, mid-audit) the full-project map those deep-reads sit inside.
+
+---
+
+## 1. Scope Sizing (per-file deep read, after the context graph)
 
 - **Single file / small diff (<500 lines):** full inline read, audit directly.
 - **Module or feature folder:** read module boundary first (`build.gradle.kts`, package root), then scan files within it. Do not pull in unrelated modules.
@@ -13,7 +25,7 @@ Use this when auditing or refactoring **existing** Android/Compose/KMP code (as 
 
 ---
 
-## 1. Audit Dimensions (all 10 required)
+## 2. Audit Dimensions (all 10 required)
 
 ### A. Google Android Coding Standards & Style
 - Language coverage: Java, XML, Kotlin, Compose, KMP.
@@ -66,19 +78,21 @@ Use this when auditing or refactoring **existing** Android/Compose/KMP code (as 
 
 ---
 
-## 2. Workflow
+## 3. Workflow
 
-**Step 0 — Scope Sizing.** Apply Section 0.
+**Step 0 — Full-Project Context Graph.** Apply Section 0: read whole-project structure, build the module/dependency (or import) graph.
 
-**Step 1 — Initial Finding & Prioritized TODO Matrix.** Four tiers:
+**Step 1 — Scope Sizing.** Apply Section 1 for per-file deep reads.
+
+**Step 2 — Initial Finding & Prioritized TODO Matrix.** Four tiers:
 1. `[CRITICAL]` — ANRs, security vulnerabilities, data leakage, NPE crash risks, severe memory leaks, a11y blockers on core flows.
 2. `[HIGH]` — architectural violations, unnecessary Compose recompositions, main-thread I/O, UI bleeding/clipping, zero test coverage on critical logic.
 3. `[MEDIUM]` — redundancy, unused code/imports, missing lambdas/idioms, missing error handling, non-blocking a11y gaps.
 4. `[LOW]` — indentation, naming, minor style, deprecated-dependency version bumps.
 
-**Step 2 — Systematic Refactoring.** Resolve CRITICAL → LOW in order. For each: present refactored production code plus a one-line "why" (e.g. *Fixed ANR by switching to `Dispatchers.IO`*, *prevented leak by binding job to `viewLifecycleOwner`*).
+**Step 3 — Systematic Refactoring.** Resolve CRITICAL → LOW in order. For each: present refactored production code plus a one-line "why" (e.g. *Fixed ANR by switching to `Dispatchers.IO`*, *prevented leak by binding job to `viewLifecycleOwner`*).
 
-**Step 3 — Zero-Technical-Debt Verification.** Confirm:
+**Step 4 — Zero-Technical-Debt Verification.** Confirm:
 - Project still compiles and existing tests pass (run build/test if the environment allows; if not runnable, say so explicitly and why).
 - No regressions introduced.
 - Google Android standards followed (Kotlin/Compose/XML/KMP/Java), 4-space indentation throughout.
@@ -86,10 +100,23 @@ Use this when auditing or refactoring **existing** Android/Compose/KMP code (as 
 
 ---
 
-## 3. Output Format
+## 4. Output Format
 
 ```markdown
 # 🔍 Android Code Audit Report
+
+## 🗺️ Project Context Graph
+[Mermaid module/dependency graph (or package/import graph for single-module apps), e.g.:]
+
+​```mermaid
+graph TD
+    app --> feature_settings_impl
+    feature_settings_impl --> feature_settings_api
+    feature_settings_impl --> core_data
+    core_data --> core_network
+    core_data --> core_database
+    core_data --> core_model
+​```
 
 ## 📊 Summary of Findings
 - **Critical Issues:** [Count]
