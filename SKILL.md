@@ -1,11 +1,11 @@
 ---
 name: android-development
-description: Create production-quality Android applications following Google's official architecture guidance and NowInAndroid best practices. Use when building Android apps with Kotlin, Jetpack Compose, MVVM architecture, Hilt dependency injection, Room database, or multi-module projects. Triggers on requests to create Android projects, screens, ViewModels, repositories, feature modules, or when asked about Android architecture patterns.
+description: Create, audit, and refactor production-quality Android applications following Google's official architecture guidance and NowInAndroid best practices. Use when building Android apps with Kotlin, Jetpack Compose, MVVM architecture, Hilt dependency injection, Room database, or multi-module projects — or when auditing/refactoring existing Android/Compose/KMP code for quality, performance, ANR risk, memory leaks, security, accessibility, or test coverage. Triggers on requests to create Android projects, screens, ViewModels, repositories, feature modules, ask about Android architecture patterns, or to audit/review/refactor existing Android code.
 ---
 
 # Android Development
 
-Build Android applications following Google's official architecture guidance, as demonstrated in the NowInAndroid reference app.
+Build Android applications following Google's official architecture guidance, as demonstrated in the NowInAndroid reference app. Also audits and refactors existing Android/Compose/KMP code to zero technical debt.
 
 ## Quick Reference
 
@@ -15,7 +15,8 @@ Build Android applications following Google's official architecture guidance, as
 | Architecture layers (UI, Domain, Data) | [architecture.md](references/architecture.md) |
 | Jetpack Compose patterns | [compose-patterns.md](references/compose-patterns.md) |
 | Gradle & build configuration | [gradle-setup.md](references/gradle-setup.md) |
-| Testing approach | [testing.md](references/testing.md) |
+| Testing approach (writing new tests) | [testing.md](references/testing.md) |
+| Auditing/refactoring existing code | [audit-checklist.md](references/audit-checklist.md) |
 
 ## Workflow Decision Tree
 
@@ -34,6 +35,10 @@ Build Android applications following Google's official architecture guidance, as
 **Setting up data layer?**
 → Read data layer section in [architecture.md](references/architecture.md)
 → Create Repository + DataSource + DAO
+
+**Auditing, reviewing, or refactoring existing Android/Compose/KMP code?**
+→ Read [audit-checklist.md](references/audit-checklist.md)
+→ Run its Scope Sizing → TODO Matrix → Refactor → Verify workflow (10 dimensions: style, memory, performance/ANR, security, UI integrity, architecture, dead code, bugs, test coverage, accessibility)
 
 ## Core Principles
 

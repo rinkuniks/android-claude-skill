@@ -1,6 +1,6 @@
-# [WIP] Android Development Skill for Claude Code
+# Android Development & Audit Skill for Claude Code
 
-A production-ready skill that enables Claude Code to build Android applications following Google's official architecture guidance and best practices from the [NowInAndroid](https://github.com/android/nowinandroid) reference app.
+A production-ready skill that enables Claude Code to **build** Android applications following Google's official architecture guidance and best practices from the [NowInAndroid](https://github.com/android/nowinandroid) reference app — and to **audit/refactor existing** Android, Jetpack Compose, and Kotlin Multiplatform (KMP) code down to zero technical debt.
 
 ## Overview
 
@@ -13,24 +13,70 @@ This skill provides Claude with comprehensive knowledge of modern Android develo
 - **Dependency injection** with Hilt
 - **Comprehensive testing** strategies
 
+...and a full **code audit & refactoring workflow** covering:
+
+- Style & Kotlin idioms (4-space indentation, lambdas, dead code)
+- Memory leak & ANR prevention
+- Compose recomposition performance
+- Security & data leakage (secrets, encrypted storage, exported components)
+- UI integrity (edge-to-edge insets, layout bleeding, localization)
+- Architectural compliance (MVVM/MVI/Clean, UDF)
+- Test coverage gaps
+- Accessibility (a11y)
+
+See [SKILL.md](SKILL.md) for the full reference index and [references/audit-checklist.md](references/audit-checklist.md) for the complete audit workflow.
+
 ## Installation
 
-1. Clone this repository into your Claude Code skills directory:
-   ```bash
-   git clone https://github.com/dpconde/claude-android-skill.git
-   ```
+Claude Code loads skills from a `SKILL.md` file in a recognized skills directory — personal, project-level, or anywhere you point it. Pick whichever fits:
 
-2. Claude Code will automatically detect and load the skill when you work on Android projects.
+### Option 1 — Personal skills directory (available in every project)
+```bash
+git clone https://github.com/rinkuniks/android-claude-skill.git ~/.claude/skills/android-claude-skill
+```
+Claude Code auto-detects skills under `~/.claude/skills/` on startup — no restart config needed beyond starting a new session.
+
+### Option 2 — Project-level skill (shared with your team via your repo)
+```bash
+mkdir -p .claude/skills
+git clone https://github.com/rinkuniks/android-claude-skill.git .claude/skills/android-claude-skill
+```
+Commit `.claude/skills/android-claude-skill` (or add it as a git submodule) so teammates get the skill automatically when they clone the project.
+
+### Option 3 — Git submodule (stay pinned to a version, easy to update)
+```bash
+git submodule add https://github.com/rinkuniks/android-claude-skill.git .claude/skills/android-claude-skill
+git submodule update --init --recursive
+```
+
+### Option 4 — Manual download (no git)
+1. Download this repo as a ZIP (GitHub → Code → Download ZIP).
+2. Unzip it into `~/.claude/skills/android-claude-skill` (personal) or `<your-project>/.claude/skills/android-claude-skill` (project-level).
+
+### Updating later
+```bash
+cd ~/.claude/skills/android-claude-skill   # or the project-level path
+git pull
+```
+
+After installing, start (or restart) Claude Code in that context — it discovers the skill automatically. No slash command needed; it's a description-triggered skill.
 
 ## Usage
 
 The skill automatically activates when you request Android-related tasks. Simply ask Claude to:
 
+**Build:**
 - "Create a new Android feature module for user settings"
 - "Build a Compose screen with MVVM pattern"
 - "Set up a Repository with offline-first architecture"
 - "Add navigation to my Android app"
 - "Configure multi-module Gradle setup"
+
+**Audit / refactor:**
+- "Audit this Android module for memory leaks and ANR risk"
+- "Review this Compose screen for unnecessary recompositions"
+- "Refactor this repository class and fix security issues"
+- "Check this codebase for accessibility gaps"
 
 Claude will follow the patterns and best practices defined in this skill.
 
@@ -44,7 +90,8 @@ claude-android-skill/
 │   ├── compose-patterns.md     # Jetpack Compose best practices
 │   ├── gradle-setup.md         # Build configuration & convention plugins
 │   ├── modularization.md       # Multi-module project structure
-│   └── testing.md              # Testing strategies and patterns
+│   ├── testing.md              # Testing strategies and patterns
+│   └── audit-checklist.md      # Code audit & refactoring workflow (10 dimensions)
 ├── assets/
 │   └── templates/              # Project templates
 │       ├── libs.versions.toml.template
@@ -196,6 +243,8 @@ This skill configures projects with:
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## Acknowledgments
+
+This repository is a fork/extension of [dpconde/claude-android-skill](https://github.com/dpconde/claude-android-skill) by David Perez, with an added code-audit & refactoring workflow. Original MIT license and copyright retained — see [LICENSE](LICENSE).
 
 Based on patterns and practices from:
 - [NowInAndroid](https://github.com/android/nowinandroid) by Google
