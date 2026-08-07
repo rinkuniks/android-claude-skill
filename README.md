@@ -1,5 +1,14 @@
 # Android Development & Audit Skill for Claude Code
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Android](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=white)
+![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?logo=kotlin&logoColor=white)
+![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?logo=jetpackcompose&logoColor=white)
+![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin%20Multiplatform-7F52FF?logo=kotlin&logoColor=white)
+![MVVM](https://img.shields.io/badge/Architecture-MVVM-orange)
+![Code Audit](https://img.shields.io/badge/Code%20Audit-10%20dimensions-informational)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)
+
 A production-ready skill that enables Claude Code to **build** Android applications following Google's official architecture guidance and best practices from the [NowInAndroid](https://github.com/android/nowinandroid) reference app — and to **audit/refactor existing** Android, Jetpack Compose, and Kotlin Multiplatform (KMP) code down to zero technical debt.
 
 ## Overview
