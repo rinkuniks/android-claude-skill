@@ -37,7 +37,13 @@ See [SKILL.md](SKILL.md) for the full reference index and [references/audit-chec
 
 ## Installation
 
-Claude Code loads skills from a `SKILL.md` file in a recognized skills directory — personal, project-level, or anywhere you point it. Pick whichever fits:
+**Quick install** (personal, works in every project):
+```bash
+git clone https://github.com/rinkuniks/android-claude-skill.git ~/.claude/skills/android-claude-skill
+```
+Restart Claude Code (or start a new session) — the skill is picked up automatically. It auto-triggers on Android-related requests, or invoke it directly by typing `/android-development` in the prompt.
+
+Other install locations below — pick whichever fits.
 
 ### Option 1 — Personal skills directory (available in every project)
 ```bash
@@ -68,7 +74,7 @@ cd ~/.claude/skills/android-claude-skill   # or the project-level path
 git pull
 ```
 
-After installing, start (or restart) Claude Code in that context — it discovers the skill automatically. No slash command needed; it's a description-triggered skill.
+After installing, start (or restart) Claude Code in that context — it discovers the skill automatically. It auto-triggers on Android-related requests, or type `/android-development` to invoke it directly.
 
 ## Usage
 
