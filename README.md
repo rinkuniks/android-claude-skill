@@ -8,6 +8,8 @@
 ![MVVM](https://img.shields.io/badge/Architecture-MVVM-orange)
 ![Code Audit](https://img.shields.io/badge/Code%20Audit-10%20dimensions-informational)
 ![Claude Code](https://img.shields.io/badge/Claude%20Code-Skill-D97757)
+[![GitHub stars](https://img.shields.io/github/stars/rinkuniks/android-claude-skill?style=flat&label=stars)](https://github.com/rinkuniks/android-claude-skill/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/rinkuniks/android-claude-skill?style=flat&label=forks)](https://github.com/rinkuniks/android-claude-skill/forks)
 
 A production-ready skill that enables Claude Code to **build** Android applications following Google's official architecture guidance and best practices from the [NowInAndroid](https://github.com/android/nowinandroid) reference app — and to **audit/refactor existing** Android, Jetpack Compose, and Kotlin Multiplatform (KMP) code down to zero technical debt.
 
@@ -252,6 +254,20 @@ This skill configures projects with:
 - **Async**: Kotlin Coroutines + Flow
 - **Testing**: JUnit, Turbine, Compose Testing
 - **Build**: Gradle with Convention Plugins
+
+## Usage Analytics
+
+No telemetry is embedded in the skill itself — it doesn't phone home when Claude Code loads or runs it. Adoption is tracked entirely through GitHub's own repo signals:
+
+- **Stars / forks / watchers** — public, shown in the badges above and on the repo page.
+- **Clone traffic** (unique cloners, total clones, last 14 days) — owner-only, under the repo's **Insights → Traffic** tab on GitHub, or via:
+  ```bash
+  gh api repos/rinkuniks/android-claude-skill/traffic/clones
+  gh api repos/rinkuniks/android-claude-skill/traffic/views
+  ```
+- **Dependents / forks network** — under **Insights → Forks** and the repo's dependency graph.
+
+These reflect installs/clones, not in-session invocations of the skill — Claude Code doesn't report skill usage externally.
 
 ## License
 
