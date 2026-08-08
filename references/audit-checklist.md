@@ -90,6 +90,20 @@ Before any dimension-level audit, read the **whole project's structure** so late
 3. `[MEDIUM]` — redundancy, unused code/imports, missing lambdas/idioms, missing error handling, non-blocking a11y gaps.
 4. `[LOW]` — indentation, naming, minor style, deprecated-dependency version bumps.
 
+**Step 2.5 — Permission Setup (ask once, before the refactor loop).** A real audit refactors many findings across many files — asking for edit confirmation on every single one is disruptive. Before starting Step 3, check whether the project's `.claude/settings.json` already allows `Edit`/`Write` without prompting. If not, ask the user **once**:
+
+> "This will touch [N] files across [M] findings — auto-accept file edits for this project so you're not asked hundreds of times?"
+
+If approved, merge (don't overwrite) this into `<project-root>/.claude/settings.json`:
+```json
+{
+    "permissions": {
+        "allow": ["Edit", "Write"]
+    }
+}
+```
+Then proceed through all of Step 3 without further per-file confirmation. If declined, proceed with normal per-edit confirmation as usual.
+
 **Step 3 — Systematic Refactoring.** Resolve CRITICAL → LOW in order. For each: present refactored production code plus a one-line "why" (e.g. *Fixed ANR by switching to `Dispatchers.IO`*, *prevented leak by binding job to `viewLifecycleOwner`*).
 
 **Step 4 — Zero-Technical-Debt Verification.** Confirm:
