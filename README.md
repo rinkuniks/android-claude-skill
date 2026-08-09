@@ -78,6 +78,20 @@ git pull
 
 After installing, start (or restart) Claude Code in that context — it discovers the skill automatically. It auto-triggers on Android-related requests, or type `/android-development` to invoke it directly.
 
+## Other Agents / IDEs (Codex, Cursor, VS Code Copilot, Antigravity, etc.)
+
+The actual knowledge — architecture guidance, patterns, and the 10-dimension audit checklist — lives in plain markdown under [references/](references/) and is tool-agnostic. Only the *entrypoint file* differs per tool:
+
+| Tool | Entrypoint | Setup |
+|------|-----------|-------|
+| **Claude Code** | `SKILL.md` | Clone into `~/.claude/skills/` or `<project>/.claude/skills/` (see Installation above) — auto-discovered. |
+| **OpenAI Codex CLI** (and other `AGENTS.md`-convention tools: Cursor, Amp, Jules, RooCode, etc.) | `AGENTS.md` | Clone this repo, then copy or symlink `AGENTS.md` (and the `references/` folder) into your project root: `cp -r android-claude-skill/{AGENTS.md,references} ./`. These tools auto-read `AGENTS.md` at the project root. |
+| **VS Code + GitHub Copilot Chat** | none built-in | Copy `AGENTS.md`'s content into `.github/copilot-instructions.md` in your repo (Copilot auto-loads this), or split per-topic into `.github/instructions/*.instructions.md` files. Keep `references/` alongside for Copilot to read on demand. |
+| **Google Antigravity** | check current docs | Antigravity is new enough that its custom-instructions convention may still change — if it reads `AGENTS.md` or a similar root markdown file, point it at this repo's `AGENTS.md` the same way as Codex CLI above; otherwise paste the relevant `references/*.md` file into whatever context mechanism it exposes. |
+| **Any other agent** | — | If it supports a root instructions/context markdown file, use `AGENTS.md`. If it only supports pasted context, use the individual `references/*.md` files directly — they contain the actual patterns and have no Claude-specific syntax. |
+
+`SKILL.md` and `AGENTS.md` carry the same guidance; only `SKILL.md` has the extra YAML frontmatter Claude Code uses for auto-discovery. Both link to the same `references/` files, so there's a single source of truth for the actual content.
+
 ## Usage
 
 The skill automatically activates when you request Android-related tasks. Simply ask Claude to:
