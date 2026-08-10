@@ -65,6 +65,8 @@ Before any dimension-level audit, read the **whole project's structure** so late
 
 ### H. Bug & Exception Safeguards
 - Unsafe `!!`, unhandled coroutine exceptions (`CoroutineExceptionHandler`, `runCatching`), state-preservation edge cases.
+- **`lateinit` misuse:** property accessed before initialization (e.g. from a callback that can fire before `onCreate`/`onViewCreated` finishes), `lateinit` used where a nullable type or `by lazy` would be safer, no `::prop.isInitialized` guard where access order isn't guaranteed.
+- **Java interop nullability:** missing `@Nullable`/`@NonNull` (or JSR-305 `@Nullable`/androidx annotations) on Java methods/fields consumed from Kotlin — Kotlin treats unannotated Java types as platform types (`T!`), silently skipping null checks the compiler would otherwise enforce. Flag Java APIs called from Kotlin without nullability annotations, and unguarded use of their return values.
 
 ### I. Test Coverage
 - Unit tests for ViewModel/UseCase/Repository logic; Compose UI tests for critical screens.
